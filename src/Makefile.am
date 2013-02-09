@@ -12,12 +12,14 @@ lib_LTLIBRARIES=\
 
 libmooguor_la_SOURCES=\
 	object.cpp\
+	parser_json.cpp\
 	variant.cpp\
 	variant_string.cpp\
 	variant_list.cpp\
 	variant_map.cpp
 
-#libmooguor_la_LDFLAGS=
+libmooguor_la_LDFLAGS=\
+	-ljson
 
 LDADD=\
 	libmooguor.la

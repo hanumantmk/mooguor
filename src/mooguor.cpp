@@ -5,6 +5,8 @@
 #include "variant_list.h"
 #include "variant_map.h"
 
+#include "parser_json.h"
+
 using namespace Mooguor;
 using namespace std;
 
@@ -29,6 +31,10 @@ int main(int argc, char ** argv)
 
     cout << baz << endl;
     cout << baz.toList()[1] << endl;
+
+    Parser::JSON jparser;
+
+    cout << jparser.parse("{ \"foo\" : [ \"bar\", 10 ] }") << endl;
 
     return 0;
 }
