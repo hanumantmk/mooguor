@@ -1,8 +1,8 @@
 #ifndef MOOGUOR_VARIANT_MAP_H
 #define MOOGUOR_VARIANT_MAP_H
 
-#include "variant.h"
-#include "variant_base.h"
+#include "variant.hpp"
+#include "variant_base.hpp"
 #include <map>
 
 namespace Mooguor {

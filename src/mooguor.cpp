@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "variant.h"
-#include "variant_string.h"
-#include "variant_list.h"
-#include "variant_map.h"
+#include "variant.hpp"
+#include "variant_string.hpp"
+#include "variant_list.hpp"
+#include "variant_map.hpp"
 
-#include "parser_json.h"
+#include "parser_json.hpp"
 
 using namespace Mooguor;
 using namespace std;

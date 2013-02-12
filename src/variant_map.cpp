@@ -1,5 +1,5 @@
-#include "debug.h"
-#include "variant_map.h"
+#include "debug.hpp"
+#include "variant_map.hpp"
 
 using namespace Mooguor;
 

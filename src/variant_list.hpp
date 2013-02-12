@@ -1,8 +1,8 @@
 #ifndef MOOGUOR_VARIANT_LIST_H
 #define MOOGUOR_VARIANT_LIST_H
 
-#include "variant.h"
-#include "variant_base.h"
+#include "variant.hpp"
+#include "variant_base.hpp"
 #include <vector>
 
 namespace Mooguor {

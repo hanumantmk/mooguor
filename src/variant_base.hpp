@@ -1,7 +1,7 @@
 #ifndef MOOGUOR_VARIANTBASE_H
 #define MOOGUOR_VARIANTBASE_H
 
-#include "object.h"
+#include "object.hpp"
 
 namespace Mooguor {
 

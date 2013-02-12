@@ -1,8 +1,8 @@
-#include "debug.h"
-#include "variant.h"
-#include "variant_map.h"
-#include "variant_list.h"
-#include "variant_string.h"
+#include "debug.hpp"
+#include "variant.hpp"
+#include "variant_map.hpp"
+#include "variant_list.hpp"
+#include "variant_string.hpp"
 
 using namespace Mooguor;
 

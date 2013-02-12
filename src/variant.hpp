@@ -1,8 +1,8 @@
 #ifndef MOOGUOR_VARIANT_H
 #define MOOGUOR_VARIANT_H
 
-#include "object.h"
-#include "variant_base.h"
+#include "object.hpp"
+#include "variant_base.hpp"
 
 namespace Mooguor {
 

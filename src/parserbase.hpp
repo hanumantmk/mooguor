@@ -2,8 +2,8 @@
 #define MOOGUOR_PARSERBASE_H
 
 #include <string>
-#include "object.h"
-#include "variant.h"
+#include "object.hpp"
+#include "variant.hpp"
 
 namespace Mooguor {
 

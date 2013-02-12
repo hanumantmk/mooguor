@@ -2,7 +2,7 @@
 #define MOOGUOR_ADAPATER_H
 
 #include <string>
-#include "object.h"
+#include "object.hpp"
 
 namespace Mooguor {
 

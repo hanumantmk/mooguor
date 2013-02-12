@@ -3,8 +3,8 @@
 
 #include <string>
 #include <json/json.h>
-#include "object.h"
-#include "parserbase.h"
+#include "object.hpp"
+#include "parserbase.hpp"
 
 namespace Mooguor {
 namespace Parser {

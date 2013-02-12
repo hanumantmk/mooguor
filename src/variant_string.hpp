@@ -1,7 +1,7 @@
 #ifndef MOOGUOR_VARIANT_STRING_H
 #define MOOGUOR_VARIANT_STRING_H
 
-#include "variant_base.h"
+#include "variant_base.hpp"
 #include <string>
 
 namespace Mooguor {
