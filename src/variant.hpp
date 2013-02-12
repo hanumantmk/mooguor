@@ -1,6 +1,7 @@
 #ifndef MOOGUOR_VARIANT_H
 #define MOOGUOR_VARIANT_H
 
+#include <memory>
 #include "object.hpp"
 #include "variant_base.hpp"
 
@@ -23,8 +24,9 @@ public:
 private:
     Type type;
 
+    std::unique_ptr<VariantBase> vb_ptr;
+
     union {
-        VariantBase * vb_ptr;
         int n;
     } u;
 
@@ -43,7 +45,7 @@ public:
 
     Variant & operator= (const Variant & v);
 
-    ~Variant();
+//    ~Variant();
 
     Type getType() const;
 

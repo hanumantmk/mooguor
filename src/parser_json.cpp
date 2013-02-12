@@ -18,10 +18,10 @@ Variant JSON::parse(const std::string & str)
 
 Variant parseObject(json_object * obj)
 {
-    VariantMap map;
+    VariantMap * map = new VariantMap();
 
     json_object_object_foreach(obj, key, value) {
-        map[key] = parseJSON(value);
+        (*map)[key] = parseJSON(value);
     }
 
     return Variant(map);
@@ -29,10 +29,10 @@ Variant parseObject(json_object * obj)
 
 Variant parseArray(json_object * obj)
 {
-    VariantList list;
+    VariantList * list = new VariantList();
 
     for (int i = 0; i < json_object_array_length(obj); i++) {
-        list.push_back(parseJSON(json_object_array_get_idx(obj, i)));
+        list->push_back(parseJSON(json_object_array_get_idx(obj, i)));
     }
 
     return Variant(list);
