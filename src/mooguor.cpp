@@ -15,17 +15,17 @@ int main(int argc, char ** argv)
     Variant foo("foo");
     Variant bar(12);
 
-    VariantMap map;
-    VariantList list;
+    VariantMap * map = new VariantMap();
+    VariantList * list = new VariantList();
 
-    map["string"] = foo;
-    map["int"] = bar;
+    (*map)["string"] = foo;
+    (*map)["int"] = bar;
 
-    list.push_back(foo);
-    list.push_back(bar);
+    list->push_back(foo);
+    list->push_back(bar);
 
     Variant vmap(map);
-    list.push_back(vmap);
+    list->push_back(vmap);
 
     Variant baz(list);
 

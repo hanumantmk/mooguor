@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "variant.h"
 #include "variant_map.h"
 #include "variant_list.h"
@@ -27,6 +28,7 @@ Variant::Variant() : type(Variant::Type::NONE) {}
 
 Variant::Variant(const Variant & v)
 {
+    std::cout << "copy called" << std::endl;
     copy(v);
 }
 
@@ -64,6 +66,11 @@ Variant::Variant(int x) : type(Variant::Type::INT)
     u.n = x;
 }
 
+Variant::Variant(VariantString & s) : type(Variant::Type::STRING)
+{
+    u.vb_ptr = new VariantString(s);
+}
+
 Variant::Variant(VariantList & l) : type(Variant::Type::LIST)
 {
     u.vb_ptr = new VariantList(l);
@@ -73,6 +80,22 @@ Variant::Variant(VariantMap & m): type(Variant::Type::MAP)
 {
     u.vb_ptr = new VariantMap(m);
 }
+
+Variant::Variant(VariantString * s) : type(Variant::Type::STRING)
+{
+    u.vb_ptr = s;
+}
+
+Variant::Variant(VariantList * l) : type(Variant::Type::LIST)
+{
+    u.vb_ptr = l;
+}
+
+Variant::Variant(VariantMap * m): type(Variant::Type::MAP)
+{
+    u.vb_ptr = m;
+}
+
 
 Variant::Type Variant::getType() const
 {

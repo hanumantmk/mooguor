@@ -1,7 +1,7 @@
 AM_CXXFLAGS= \
 	-Wall \
 	-Werror \
-	-std=c++0x \
+	-std=c++11 \
 	-ggdb3
 
 bin_PROGRAMS =\

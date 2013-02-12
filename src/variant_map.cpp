@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "variant_map.h"
 
 using namespace Mooguor;
@@ -32,20 +33,12 @@ int VariantMap::size() const
 
 void VariantMap::print(std::ostream & out) const
 {
-    out << "MAP(";
-
-    for (VariantMap::const_iterator it = begin(); it != end(); ++it) {
-        out << it->first << " : " << it->second;
-
-        ++it;
-        if (it != end()) {
-            out << ", ";
-        }
-
-        --it;
-    }
-
-    out << ")";
+    out <<
+        "MAP(" <<
+            Debug::join<VariantMap>(*this, ", ", [](VariantMap::const_iterator it, std::ostream & os){
+                os << it->first << " : " << it->second;
+            }) <<
+        ")";
 }
 
 Variant & VariantMap::operator[] (const std::string & k)

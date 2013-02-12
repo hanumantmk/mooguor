@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "variant_list.h"
 
 using namespace Mooguor;
@@ -47,17 +48,9 @@ const Variant & VariantList::back() const
 
 void VariantList::print(std::ostream & out) const
 {
-    out << "LIST(";
+    std::string str = Debug::joinObjects(*this, ", ");
 
-    for (VariantList::const_iterator it = begin(); it != end(); ++it) {
-        out << *it;
-
-        if (it + 1 != end()) {
-            out << ", ";
-        }
-    }
-
-    out << ")";
+    out << "LIST(" << str << ")";
 }
 
 Variant & VariantList::operator[] (int i)

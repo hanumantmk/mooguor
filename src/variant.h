@@ -36,6 +36,10 @@ public:
     Variant(int x);
     Variant(VariantList & l);
     Variant(VariantMap & m);
+    Variant(VariantString & s);
+    Variant(VariantList * l);
+    Variant(VariantMap * m);
+    Variant(VariantString * s);
 
     Variant & operator= (const Variant & v);
 
