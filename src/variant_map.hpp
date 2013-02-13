@@ -21,7 +21,8 @@ public:
     const_iterator end() const;
 
     VariantMap();
-    VariantMap(const std::map<std::string, Variant> & e);
+    VariantMap(const VariantMap & vm);
+    VariantMap(VariantMap && vm);
 
     int size() const;
 

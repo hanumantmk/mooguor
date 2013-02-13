@@ -6,19 +6,6 @@
 
 using namespace Mooguor;
 
-//Variant::~Variant()
-//{
-//    switch (getType()) {
-//        case Variant::Type::STRING:
-//        case Variant::Type::LIST:
-//        case Variant::Type::MAP:
-//            delete vb_ptr;
-//            break;
-//        default:
-//            break;
-//    }
-//}
-
 Variant::Variant(const char * s) : type(Variant::Type::STRING)
 {
     vb_ptr = std::unique_ptr<VariantBase>(new VariantString(s));
@@ -31,9 +18,15 @@ Variant::Variant(const Variant & v)
     copy(v);
 }
 
+Variant::Variant(Variant && v)
+{
+    swap(v);
+}
+
 Variant & Variant::copy(const Variant & v)
 {
-    std::cout << "copy called" << std::endl;
+    std::cout << "copying " << v << std::endl;
+
     type = v.type;
 
     switch (type) {
@@ -66,36 +59,20 @@ Variant::Variant(int x) : type(Variant::Type::INT)
     u.n = x;
 }
 
-Variant::Variant(VariantString & s) : type(Variant::Type::STRING)
+Variant::Variant(VariantString s) : type(Variant::Type::STRING)
 {
-    vb_ptr = std::unique_ptr<VariantBase>(new VariantString(s));
+    vb_ptr = std::unique_ptr<VariantBase>(new VariantString(std::move(s)));
 }
 
-Variant::Variant(VariantList & l) : type(Variant::Type::LIST)
+Variant::Variant(VariantList l) : type(Variant::Type::LIST)
 {
-    vb_ptr = std::unique_ptr<VariantBase>(new VariantList(l));
+    vb_ptr = std::unique_ptr<VariantBase>(new VariantList(std::move(l)));
 }
 
-Variant::Variant(VariantMap & m): type(Variant::Type::MAP)
+Variant::Variant(VariantMap m): type(Variant::Type::MAP)
 {
-    vb_ptr = std::unique_ptr<VariantBase>(new VariantMap(m));
+    vb_ptr = std::unique_ptr<VariantBase>(new VariantMap(std::move(m)));
 }
-
-Variant::Variant(VariantString * s) : type(Variant::Type::STRING)
-{
-    vb_ptr = std::unique_ptr<VariantBase>(s);
-}
-
-Variant::Variant(VariantList * l) : type(Variant::Type::LIST)
-{
-    vb_ptr = std::unique_ptr<VariantBase>(l);
-}
-
-Variant::Variant(VariantMap * m): type(Variant::Type::MAP)
-{
-    vb_ptr = std::unique_ptr<VariantBase>(m);
-}
-
 
 Variant::Type Variant::getType() const
 {
@@ -122,7 +99,7 @@ bool Variant::isMap() const
     return getType() == Variant::Type::MAP;
 }
 
-VariantString & Variant::toString()
+VariantString Variant::toString()
 {
     return *(static_cast<VariantString *>(vb_ptr.get()));
 }
@@ -132,7 +109,7 @@ const VariantString & Variant::toString() const
     return *(static_cast<VariantString *>(vb_ptr.get()));
 }
 
-VariantList & Variant::toList()
+VariantList Variant::toList()
 {
     return *(static_cast<VariantList *>(vb_ptr.get()));
 }
@@ -142,7 +119,7 @@ const VariantList & Variant::toList() const
     return *(static_cast<VariantList *>(vb_ptr.get()));
 }
 
-VariantMap & Variant::toMap()
+VariantMap Variant::toMap()
 {
     return *(static_cast<VariantMap *>(vb_ptr.get()));
 }
@@ -169,7 +146,20 @@ void Variant::print(std::ostream & out) const
     }
 }
 
-Variant & Variant::operator= (const Variant & in)
+Variant & Variant::operator= (Variant in)
 {
-    return copy(in);
+    swap(in);
+
+    return *this;
+}
+
+void Variant::swap(Variant & rhs)
+{
+    std::cout << "swapping " << *this << " <-> " << rhs << std::endl;
+
+    using std::swap;
+
+    swap(type, rhs.type);
+    swap(vb_ptr, rhs.vb_ptr);
+    swap(u, rhs.u);
 }

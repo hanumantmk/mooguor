@@ -14,6 +14,9 @@ public:
     VariantString(const char * x);
     VariantString(std::string & s);
 
+    VariantString(const VariantString & vs);
+    VariantString(VariantString && vs);
+
     const std::string & toString() const;
     const char * toCString() const;
 

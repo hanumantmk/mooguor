@@ -23,22 +23,35 @@ VariantList::const_iterator VariantList::end() const
     return elements.end();
 }
 
-VariantList::VariantList(const std::vector<Variant> & e) : elements(e) {}
 VariantList::VariantList() {}
+VariantList::VariantList(const VariantList & vl) : elements(vl.elements) {}
+VariantList::VariantList(VariantList && vl)
+{
+    using std::swap;
+
+    swap(elements, vl.elements);
+}
 
 int VariantList::size() const
 {
     return elements.size();
 }
 
-void VariantList::push_back(const Variant & v)
+void VariantList::push_back(Variant v)
 {
-    elements.push_back(v);
+    using std::swap;
+
+    elements.push_back(std::move(v));
 }
 
 void VariantList::pop_back()
 {
     elements.pop_back();
+}
+
+void VariantList::reserve(size_t amount)
+{
+    elements.reserve(amount);
 }
 
 const Variant & VariantList::back() const

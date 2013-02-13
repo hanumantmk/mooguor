@@ -1,3 +1,4 @@
+#include "debug.hpp"
 #include "parser_json.hpp"
 #include "variant_string.hpp"
 #include "variant_list.hpp"
@@ -16,26 +17,28 @@ Variant JSON::parse(const std::string & str)
     return parseJSON(root.get());
 }
 
-Variant parseObject(json_object * obj)
+VariantMap parseObject(json_object * obj)
 {
-    VariantMap * map = new VariantMap();
+    VariantMap map;
 
     json_object_object_foreach(obj, key, value) {
-        (*map)[key] = parseJSON(value);
+        map[key] = parseJSON(value);
     }
 
-    return Variant(map);
+    return map;
 }
 
-Variant parseArray(json_object * obj)
+VariantList parseArray(json_object * obj)
 {
-    VariantList * list = new VariantList();
+    VariantList list;
+
+    list.reserve(json_object_array_length(obj));
 
     for (int i = 0; i < json_object_array_length(obj); i++) {
-        list->push_back(parseJSON(json_object_array_get_idx(obj, i)));
+        list.push_back(parseJSON(json_object_array_get_idx(obj, i)));
     }
 
-    return Variant(list);
+    return list;
 }
 
 Variant parseJSON(json_object * obj)
@@ -54,10 +57,10 @@ Variant parseJSON(json_object * obj)
             return Variant(json_object_get_int(obj));
             break;
         case json_type_object:
-            return parseObject(obj);
+            return Variant(parseObject(obj));
             break;
         case json_type_array:
-            return parseArray(obj);
+            return Variant(parseArray(obj));
             break;
         case json_type_string:
             return Variant(json_object_get_string(obj));

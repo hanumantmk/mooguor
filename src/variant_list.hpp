@@ -21,13 +21,15 @@ public:
     const_iterator end() const;
 
     VariantList();
-    VariantList(const std::vector<Variant> & e);
+    VariantList(const VariantList & vl);
+    VariantList(VariantList && vl);
 
     int size() const;
 
-    void push_back(const Variant & v);
+    void push_back(Variant v);
     void pop_back();
     const Variant & back() const;
+    void reserve(size_t amount);
 
     virtual void print(std::ostream & out) const;
 

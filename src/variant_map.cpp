@@ -23,8 +23,14 @@ VariantMap::const_iterator VariantMap::end() const
     return map.end();
 }
 
-VariantMap::VariantMap(const std::map<std::string, Variant> & e) : map(e) {}
 VariantMap::VariantMap() {}
+VariantMap::VariantMap(const VariantMap & vm) : map(vm.map) {}
+VariantMap::VariantMap(VariantMap && vm)
+{
+    using std::swap;
+
+    swap(map, vm.map);
+}
 
 int VariantMap::size() const
 {

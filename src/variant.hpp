@@ -33,19 +33,15 @@ private:
 public:
     Variant();
     Variant(const Variant & v);
+    Variant(Variant && v);
     Variant(const char * s);
     Variant(std::string & s);
     Variant(int x);
-    Variant(VariantList & l);
-    Variant(VariantMap & m);
-    Variant(VariantString & s);
-    Variant(VariantList * l);
-    Variant(VariantMap * m);
-    Variant(VariantString * s);
+    Variant(VariantList l);
+    Variant(VariantMap m);
+    Variant(VariantString s);
 
-    Variant & operator= (const Variant & v);
-
-//    ~Variant();
+    Variant & operator= (Variant v);
 
     Type getType() const;
 
@@ -54,9 +50,9 @@ public:
     bool isList() const;
     bool isMap() const;
 
-    VariantString & toString();
-    VariantList & toList();
-    VariantMap & toMap();
+    VariantString toString();
+    VariantList toList();
+    VariantMap toMap();
 
     const VariantString & toString() const;
     const VariantList & toList() const;
@@ -64,6 +60,8 @@ public:
     int toInt();
 
     virtual void print(std::ostream & out) const;
+
+    void swap(Variant & rhs);
 
 private:
     Variant & copy(const Variant & in);

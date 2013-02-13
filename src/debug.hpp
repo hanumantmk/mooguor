@@ -11,7 +11,7 @@ namespace Mooguor {
 namespace Debug {
 
 template <class T>
-std::string join(const T seq, const char * sep, void (* fun)(typename T::const_iterator, std::ostream &))
+std::string join(const T & seq, const char * sep, void (* fun)(typename T::const_iterator, std::ostream &))
 {
     std::ostringstream oss;
 
@@ -27,7 +27,7 @@ std::string join(const T seq, const char * sep, void (* fun)(typename T::const_i
 }
 
 template <class T>
-std::string joinObjects(const T seq, const char * sep)
+std::string joinObjects(const T & seq, const char * sep)
 {
     return join<T>(seq, sep, [](typename T::const_iterator it, std::ostream & os){
         os << *it;
